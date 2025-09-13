@@ -1,17 +1,19 @@
-# busca em largura
-def bfs(grafo, search, inicio = "0")
+# busca em profundidade
+def dfs(grafo, search, inicio = "0")
   visited = []
-  fila = [inicio]
-  while fila.length > 0
-    vertex = fila[0]
-    fila.delete_at 0
+  pilha = [inicio]
+  while pilha.length > 0
+    vertex = pilha.pop()
     if not visited.include?(vertex)
-      print "#{vertex} "
       visited.append vertex
-      fila += grafo[vertex]
-
+      print "#{vertex} "
+      
       if vertex == search
         return
+      end
+      
+      grafo[vertex].each do |k|
+        pilha.append k
       end
     end
   end
@@ -33,4 +35,4 @@ grafo.keys.each do |k|
   puts "#{k} => #{grafo[k]}"
 end
 
-bfs(grafo, "5")
+dfs(grafo, "5")
